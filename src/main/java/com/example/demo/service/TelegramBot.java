@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramWebhookBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
@@ -27,6 +30,20 @@ import java.util.Map;
 @Data
 @Component
 public class TelegramBot extends TelegramWebhookBot {
+
+    public TelegramBot(List<String> citiesListString) {
+        List<BotCommand> commandList = new ArrayList<>();
+
+        commandList.add(new BotCommand("/start", "Start the bot"));
+        commandList.add(new BotCommand("/help", "Get help"));
+        commandList.add(new BotCommand("/settings", "Settings"));
+
+        try {
+            this.execute(new SetMyCommands(commandList, new BotCommandScopeDefault(), null));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Autowired
     private List<String> citiesListString;
@@ -88,6 +105,9 @@ public class TelegramBot extends TelegramWebhookBot {
     public String getBotPath() {
         return "/update";
     }
+
+
+
 }
 
 

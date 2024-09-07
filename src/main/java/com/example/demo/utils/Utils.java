@@ -56,6 +56,22 @@ public class Utils {
 
     }
 
+
+    private ReplyKeyboardMarkup createMenuKeyboard() {
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        keyboardMarkup.setResizeKeyboard(true);
+        keyboardMarkup.setOneTimeKeyboard(false);
+
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+        row.add(new KeyboardButton("Option 1"));
+        row.add(new KeyboardButton("Option 2"));
+        keyboard.add(row);
+
+        keyboardMarkup.setKeyboard(keyboard);
+        return keyboardMarkup;
+    }
+
     public void sendMessage(SendMessage response) {
         try {
             telegramBot.execute(response);
