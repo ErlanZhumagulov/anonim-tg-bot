@@ -31,19 +31,9 @@ import java.util.Map;
 @Component
 public class TelegramBot extends TelegramWebhookBot {
 
-    {
-        List<BotCommand> commandList = new ArrayList<>();
 
-        commandList.add(new BotCommand("/start", "Start the bot"));
-        commandList.add(new BotCommand("/help", "Get help"));
-        commandList.add(new BotCommand("/settings", "Settings"));
 
-        try {
-            this.execute(new SetMyCommands(commandList, new BotCommandScopeDefault(), null));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     @Autowired
     private List<String> citiesListString;
@@ -79,11 +69,34 @@ public class TelegramBot extends TelegramWebhookBot {
         var setWebhook = SetWebhook.builder()
                 .url(botConfig.getBotUri())
                 .build();
+
+
+
+
+
+
+
         try {
             this.setWebhook(setWebhook);
         } catch (TelegramApiException e) {
             System.out.println("Проблемы при инициализации бота");
         }
+
+
+        List<BotCommand> commandList = new ArrayList<>();
+
+        commandList.add(new BotCommand("/start", "Start the bot"));
+        commandList.add(new BotCommand("/help", "Get help"));
+        commandList.add(new BotCommand("/settings", "Settings"));
+
+        try {
+            this.execute(new SetMyCommands(commandList, new BotCommandScopeDefault(), null));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
     @Override

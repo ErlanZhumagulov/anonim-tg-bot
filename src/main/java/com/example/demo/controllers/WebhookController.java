@@ -103,6 +103,9 @@ public class WebhookController {
 
                 response.setReplyMarkup(utils.getKeyboardButtons("Начать регистрацию"));
 
+
+
+
                 utils.sendMessage(response);
 
                 return ResponseEntity.ok().build();
