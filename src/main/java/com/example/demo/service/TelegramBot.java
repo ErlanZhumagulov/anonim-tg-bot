@@ -31,7 +31,7 @@ import java.util.Map;
 @Component
 public class TelegramBot extends TelegramWebhookBot {
 
-    public TelegramBot(List<String> citiesListString) {
+    {
         List<BotCommand> commandList = new ArrayList<>();
 
         commandList.add(new BotCommand("/start", "Start the bot"));
